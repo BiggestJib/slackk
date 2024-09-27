@@ -35,7 +35,7 @@ export const useGenerateUploadUrl = () => {
 
   // Define the `mutate` function that handles mutation and status updates
   const mutate = useCallback(
-    async (_values: {}, options?: Options) => {
+    async (_values: Record<string, unknown>, options?: Options) => {
       try {
         setData(null); // Reset data state before mutation
         setError(null); // Reset error state before mutation
