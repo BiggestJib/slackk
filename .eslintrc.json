@@ -1,11 +1,13 @@
 {
-  "extends": ["next/core-web-vitals"],
+  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "rules": {
-    "@typescript-eslint/no-unused-vars": "warn", // Warnings for unused variables
-    "no-unused-vars": "off", // Disables vanilla JS version of the rule
-    "@typescript-eslint/explicit-module-boundary-types": "off", // Disable return type enforcement
+    "@typescript-eslint/no-unused-vars": "warn", // Warn on unused variables
+    "no-unused-vars": "off", // Disable vanilla JS rule
+    "@typescript-eslint/explicit-module-boundary-types": "off", // Don't require explicit return types
     "no-console": "off", // Allow console logs
     "no-debugger": "off", // Allow debugger statements
-    "react/no-unescaped-entities": "error" // Enforce escaping special characters in JSX
+    "react/no-unescaped-entities": "error" // Enforce proper escaping of special characters in JSX
   }
 }
