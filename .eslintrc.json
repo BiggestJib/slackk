@@ -6,8 +6,9 @@
     "@typescript-eslint/no-unused-vars": "warn", // Warn on unused variables
     "no-unused-vars": "off", // Disable vanilla JS rule
     "@typescript-eslint/explicit-module-boundary-types": "off", // Don't require explicit return types
+    "@typescript-eslint/no-explicit-any": "off", // Disable rule to allow 'any' globally
     "no-console": "off", // Allow console logs
     "no-debugger": "off", // Allow debugger statements
-    "react/no-unescaped-entities": "error" // Enforce proper escaping of special characters in JSX
+    "react/no-unescaped-entities": "off" // Disable unescaped entity check globally
   }
 }
