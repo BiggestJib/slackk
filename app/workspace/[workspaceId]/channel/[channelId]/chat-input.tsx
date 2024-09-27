@@ -82,7 +82,7 @@ const ChatInput = ({ placeholder }: ChatInputProps) => {
       setEditorKey((prevKey) => prevKey + 1);
     } catch (error) {
       // Show an error notification in case of failure
-      toast.error("Failed to send Message" || error);
+      toast.error("Failed to send Message");
     } finally {
       // Reset the loading state and re-enable the editor for further input
       setIsPending(false);
