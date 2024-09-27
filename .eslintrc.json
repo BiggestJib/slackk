@@ -1,6 +1,10 @@
 {
   "extends": ["next/core-web-vitals", "next/typescript"],
   "rules": {
-    "no-unused-vars": "off"
+    "@typescript-eslint/no-unused-vars": "warn", // Set to "off" to disable completely or "warn" to only get warnings instead of errors
+    "no-unused-vars": "off", // Disables vanilla JS version if you only use the TypeScript version
+    "@typescript-eslint/explicit-module-boundary-types": "off", // Disable if you don't want to enforce return types on functions
+    "no-console": "off", // Disable console warnings/errors
+    "no-debugger": "off" // Disable debugger errors
   }
 }
