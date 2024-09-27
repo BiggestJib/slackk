@@ -99,6 +99,7 @@ const Toolbar = () => {
                   <CommandItem
                     key={member._id}
                     asChild
+                    onSelect={() => setOpen(false)}
                     className="cursor-pointer"
                   >
                     <Link
