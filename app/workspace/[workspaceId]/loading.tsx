@@ -15,7 +15,7 @@ const LoadingPage = () => {
 
         {/* Optional subtext */}
         <p className="text-white text-opacity-80">
-          W&apos;re getting things ready for you!
+          We&apos;re getting things ready for you!
         </p>
       </div>
     </div>
