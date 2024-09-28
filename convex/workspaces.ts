@@ -226,9 +226,6 @@ export const remove = mutation({
     for (const member of members) {
       await ctx.db.delete(member._id); // Delete each member associated with the workspace
     }
-    for (const member of members) {
-      await ctx.db.delete(member._id); // Delete each member associated with the workspace
-    }
     for (const channel of channels) {
       await ctx.db.delete(channel._id); // Delete each member associated with the workspace
     }
@@ -237,9 +234,6 @@ export const remove = mutation({
     }
     for (const conversation of conversations) {
       await ctx.db.delete(conversation._id); // Delete each member associated with the workspace
-    }
-    for (const message of messages) {
-      await ctx.db.delete(message._id); // Delete each member associated with the workspace
     }
     for (const reaction of reactions) {
       await ctx.db.delete(reaction._id); // Delete each member associated with the workspace
