@@ -94,6 +94,7 @@ const WorkspaceSidebar = ({ closeSidebar }: WorkspaceSidebarProps) => {
         label="Direct Messages"
         hint="New Direct Message"
         onNew={() => {}}
+        open
       >
         {members?.map((item) => (
           <UserItem

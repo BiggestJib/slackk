@@ -9,6 +9,7 @@ interface WorkspaceSectionProps {
   children: React.ReactNode;
   label: string;
   hint: string;
+  open?: boolean;
   onNew?: () => void;
 }
 
@@ -16,6 +17,7 @@ export const WorkspaceSection = ({
   children,
   label,
   hint,
+  open,
   onNew,
 }: WorkspaceSectionProps) => {
   const [on, toggle] = useToggle(true);
@@ -56,7 +58,7 @@ export const WorkspaceSection = ({
       {on && (
         <div className="flex flex-col gap-1.5 mt-2">
           {children}
-          {onNew && (
+          {onNew && !open && (
             <Button
               className="w-full"
               variant="secondary"
