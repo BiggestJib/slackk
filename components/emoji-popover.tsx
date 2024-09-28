@@ -10,12 +10,13 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
+import Picker from "@emoji-mart/react";
+import data from "@emoji-mart/data";
 
 interface EmojiPopoverProps {
   children: React.ReactNode;
   hint?: string;
-  onEmojiSelect: (value: string) => void; // Callback now expects a string (the emoji itself)
+  onEmojiSelect: (emoji: any) => void;
 }
 
 export const EmojiPopOver = ({
@@ -42,10 +43,13 @@ export const EmojiPopOver = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleEmojiSelect = (emoji: EmojiClickData) => {
-    onEmojiSelect(emoji.emoji); // Get the emoji from the EmojiClickData object
+  const handleEmojiSelect = (emoji: any) => {
+    onEmojiSelect(emoji.native);
     setPopoverOpen(false); // Close popover after emoji selection
-    setTooltipOpen(false); // Close tooltip immediately
+
+    setTimeout(() => {
+      setTooltipOpen(false);
+    }, 500);
   };
 
   return (
@@ -64,9 +68,17 @@ export const EmojiPopOver = ({
           </TooltipContent>
         </Tooltip>
 
+        {/* Single PopoverContent with responsive behavior */}
         <PopoverContent className="p-0 w-full max-w-xs sm:max-w-sm lg:max-w-md border-none shadow-none">
           <div className="emoji-picker-container">
-            <EmojiPicker onEmojiClick={handleEmojiSelect} />
+            <Picker
+              data={data}
+              title="Select an emoji"
+              emoji="point_up"
+              onEmojiSelect={handleEmojiSelect}
+              // Dynamically adjust perLine based on screen size
+              perLine={isLargeScreen ? 10 : 7} // More emojis on large screens
+            />
           </div>
         </PopoverContent>
       </Popover>
