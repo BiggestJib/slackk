@@ -173,7 +173,7 @@ export const Thread = ({ messageId, onClose }: ThreadProps) => {
   }
 
   return (
-    <div className="h-full flex flex-col ">
+    <div className="h-full  max-w-[400px] md:max-w-full flex flex-col ">
       <div className="flex justify-between h-[49px] items-cener px-4 border-b ">
         <p className="text-lg font-bold ">Thread</p>
         <Button onClick={onClose} size="iconSm" variant={"ghost"}>
