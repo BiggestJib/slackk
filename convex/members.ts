@@ -27,7 +27,7 @@ export const current = query({
 
     // If no member is found, return null
     if (!member) {
-      return null;
+      throw new Error("Unauthorized to update this member");
     }
 
     // Return the member details if found
@@ -107,7 +107,7 @@ export const getById = query({
 
     // If no user is authenticated, return null
     if (!userId) {
-      return null;
+      throw new Error("Unauthorized to update this member");
     }
 
     // Retrieve the member document from the database by its ID (`args.id`)
@@ -115,7 +115,7 @@ export const getById = query({
 
     // If the member is not found in the database, return null
     if (!member) {
-      return null;
+      throw new Error("Unauthorized to update this member");
     }
 
     // Query the `members` table to find the current member using workspace ID and user ID
@@ -207,19 +207,19 @@ export const remove = mutation({
       )
       .unique();
     if (!currentMember) {
-      return null; // If the current member doesn't exist, return null
+      throw new Error("Unauthorized to update this member"); // If the current member doesn't exist, return null
     }
 
     // Prevent deleting if the member to be deleted is an admin
     if (member.role === "admin") {
-      return null;
+      throw new Error("Unauthorized to update this member");
     }
 
     // Prevent self-deletion if the current user is an admin
     const isSelf =
       currentMember._id == args.id && currentMember.role === "admin";
     if (isSelf) {
-      return null; // If the current admin tries to delete themselves, return null
+      throw new Error("Unauthorized to update this member"); // If the current admin tries to delete themselves, return null
     }
 
     // Query for messages, reactions, and conversations related to the member
