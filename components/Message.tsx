@@ -147,8 +147,8 @@ const Message = ({
             isRemovingMessage &&
               "bg-rose-400/40 transform transition-all scale-y-0 origin-bottom duration-200",
             currentUser?._id === memberId
-              ? "items-end px-0 mr-8"
-              : " max-w-[150px] items-start"
+              ? "items-end px-0 mr-6"
+              : "  items-start"
           )}
         >
           <div
@@ -172,7 +172,9 @@ const Message = ({
                   <Hint
                     label={`Edited on ${format(new Date(updatedAt), "MMMM do, yyyy h:mm:ss a")}`}
                   >
-                    <span className="text-xs text-gray-500">(edited)</span>
+                    <span className="text-xs text-end text-gray-100">
+                      (edited)
+                    </span>
                   </Hint>
                 )}
                 <Reactions data={reactions} onChange={handleReaction} />
@@ -269,7 +271,9 @@ const Message = ({
                 <Hint
                   label={`Edited on ${format(new Date(updatedAt), "MMMM do, yyyy h:mm:ss a")}`}
                 >
-                  <span className="text-xs text-gray-500">(edited)</span>
+                  <span className="text-xs text-end text-gray-100">
+                    (edited)
+                  </span>
                 </Hint>
               )}
 
