@@ -33,14 +33,14 @@ export const ThreadBar = ({
           <AvatarImage src={image} />
           <AvatarFallback className=" ">{avatarFallback}</AvatarFallback>
         </Avatar>
-        <span className="text-xs text-sky-700 hover:underine font-bold truncate ">
+        <span className="text-xs text-black hover:underine font-bold truncate ">
           {count} {count > 1 ? "replies" : "reply"}
         </span>
-        <span className="text-xs text-muted-foreground  truncate group-hover/thread-bar:hidden block">
+        <span className="text-xs text-white  truncate group-hover/thread-bar:hidden block">
           Last reply {formatDistanceToNow(timestamp, { addSuffix: true })}
         </span>
         <span className="text-xs text-muted-foreground truncate group-hover/thread-bar:block hidden">
-          View thread
+          Click to View the thread
         </span>
       </div>
       <ChevronRight className="size-4 text-muted-foregrond ml-auto opacity-0 group-hover/thread-bar:opacity-100 transition shrink-0" />

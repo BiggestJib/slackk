@@ -239,7 +239,7 @@ const Message = ({
         )}
         <div
           className={cn(
-            "flex text-white max-w-[150px] xl:max-w-[900px] sm:max-w-[400px] bg-gradient-to-r from-purple-600 to-indigo-600  p-4 rounded-lg shadow-lg items-start transition-transform hover:scale-105 transform-gpu gap-2",
+            "flex text-white  xl:max-w-[900px] sm:max-w-[400px] bg-gradient-to-r from-purple-600 to-indigo-600  p-4 rounded-lg shadow-lg items-start transition-transform hover:scale-105 transform-gpu gap-2",
             currentUser?._id !== memberId &&
               "bg-muted-foreground text-gray-800 gap-2 self-start"
           )}
@@ -277,7 +277,6 @@ const Message = ({
                 </Hint>
               )}
 
-              <Reactions data={reactions} onChange={handleReaction} />
               <ThreadBar
                 count={threadCount}
                 image={threadImage}
@@ -312,6 +311,9 @@ const Message = ({
             memberId={memberId}
           />
         )}
+      </div>
+      <div className="ml-16">
+        <Reactions data={reactions} onChange={handleReaction} />{" "}
       </div>
     </>
   );
