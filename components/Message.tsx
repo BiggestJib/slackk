@@ -153,7 +153,7 @@ const Message = ({
         >
           <div
             className={cn(
-              "flex flex-row-reverse gap-8 p-4 xl:max-w-[900px] sm:max-w-[600px] shadow-lg text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg transition-transform hover:scale-105 transform-gpu",
+              "flex flex-row-reverse gap-8 p-4 xl:max-w-[900px] sm:max-w-[400px] shadow-lg text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg transition-transform hover:scale-105 transform-gpu",
               currentUser?._id !== memberId &&
                 "bg-muted-foreground text-gray-800 p-4 gap-2 self-start"
             )}
