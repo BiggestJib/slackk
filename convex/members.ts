@@ -27,7 +27,7 @@ export const current = query({
 
     // If no member is found, return null
     if (!member) {
-      throw new Error("Unauthorized to update this member");
+      return null;
     }
 
     // Return the member details if found
@@ -115,7 +115,7 @@ export const getById = query({
 
     // If the member is not found in the database, return null
     if (!member) {
-      throw new Error("Unauthorized to update this member");
+      return null;
     }
 
     // Query the `members` table to find the current member using workspace ID and user ID
@@ -161,7 +161,7 @@ export const update = mutation({
 
     const member = await ctx.db.get(args.id);
     if (!member) {
-      throw new Error("Unauthorized to update this member");
+      return null;
     }
 
     const currentMember = await ctx.db
@@ -196,7 +196,7 @@ export const remove = mutation({
     // Fetch the member by ID from the database
     const member = await ctx.db.get(args.id);
     if (!member) {
-      throw new Error("Unauthorized to update this member"); // Check if the user owns the member being deleted
+      return null;
     }
 
     // Get the current member from the same workspace and user
