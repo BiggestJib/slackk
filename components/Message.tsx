@@ -15,6 +15,9 @@ import { useToggleReaction } from "./reactions/api/use-toggle-reaction";
 import { Reactions } from "./Reactions";
 import { usePanel } from "@/hooks/use-panel";
 import { ThreadBar } from "./thread-bar";
+import { useCurrentMembers } from "./members/api/use-current-member";
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
+import { useMemberId } from "@/hooks/use-member-id";
 
 const formatFullTime = (date: Date) => {
   return `${isToday(date) ? "Today" : isYesterday(date) ? "Yesterday" : format(date, "MMM d, yyyy")} at ${format(date, "h:mm:ss a")}`;
@@ -80,6 +83,9 @@ const Message = ({
     useRemoveMessage();
   const { mutate: toggleReaction, isPending: isTogglingReaction } =
     useToggleReaction();
+  const workspaceId = useWorkspaceId();
+  const { data: currentUser } = useCurrentMembers({ workspaceId });
+  console.log(currentUser);
 
   const handleUpdate = ({ body }: { body: string }) => {
     updateMessage(
@@ -137,13 +143,19 @@ const Message = ({
         <ConfirmDialog />
         <div
           className={cn(
-            "flex flex-col gap-2 p-1.5 px-8  hover:bg-gray-100/60  group relative",
+            "flex flex-col gap-2 p-1.5 px-8 rou hover:bg-gray-100/60  group relative",
             isEditing && "bg-[#f2c74433] hover:bg-[#f2c74433]",
             isRemovingMessage &&
-              "bg-rose-500/50 transform transition-all scale-y-0 origin-bottom duration-200"
+              "bg-rose-500/50 transform transition-all scale-y-0 origin-bottom duration-200",
+            currentUser?._id === memberId ? "items-end" : "items-start"
           )}
         >
-          <div className="flex items-start gap-2">
+          <div
+            className={cn(
+              "flex items-start max-w-[300px] min-w-[120px] rounded-xl  gap-2 ",
+              currentUser?._id !== memberId && "self-start bg-gray-400]"
+            )}
+          >
             <Hint label={formatFullTime(new Date(createdAt))}>
               <button className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 leading-[22px] text-center hover:underine">
                 {format(new Date(createdAt), "hh:mm")}
@@ -194,6 +206,7 @@ const Message = ({
               handleReaction={handleReaction}
               hideThreadButton={hideThreadButton}
               createdAt={createdAt}
+              memberId={memberId}
             />
           )}
         </div>
@@ -208,10 +221,16 @@ const Message = ({
           "flex flex-col gap-2 p-1.5 px-5  hover:bg-gray-100/60  group relative",
           isEditing && "bg-[#f2c74433] hover:bg-[#f2c74433]",
           isRemovingMessage &&
-            "bg-rose-500/50 transform transition-all scale-y-0 origin-bottom duration-200"
+            "bg-rose-500/50 transform transition-all scale-y-0 origin-bottom duration-200",
+          currentUser?._id === memberId ? "items-end" : "items-start"
         )}
       >
-        <div className="flex items-start gap-2">
+        <div
+          className={cn(
+            "flex items-start max-w-[300px]  gap-2",
+            currentUser?._id !== memberId && "self-start"
+          )}
+        >
           <button onClick={() => onOpenProfile(memberId)}>
             <Avatar className=" rounded-md ">
               <AvatarImage src={authorImage} />
@@ -226,7 +245,7 @@ const Message = ({
                   onClick={() => onOpenProfile(memberId)}
                   className="font-bold text-primary hover:underline"
                 >
-                  {authorName}
+                  {currentUser?._id !== memberId ? authorName : "You"}
                 </button>
                 <span>&nbsp;&nbsp;</span>
                 <Hint label={formatFullTime(new Date(createdAt))}>
@@ -278,6 +297,7 @@ const Message = ({
             handleReaction={handleReaction}
             hideThreadButton={hideThreadButton}
             createdAt={createdAt}
+            memberId={memberId}
           />
         )}
       </div>
