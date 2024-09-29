@@ -177,7 +177,6 @@ const Message = ({
                     </span>
                   </Hint>
                 )}
-                <Reactions data={reactions} onChange={handleReaction} />
                 <ThreadBar
                   count={threadCount}
                   image={threadImage}
@@ -212,6 +211,22 @@ const Message = ({
               memberId={memberId}
             />
           )}
+          <div
+            className={cn(
+              "items-end ml-16 flex",
+              currentUser?._id !== memberId && "hidden ml-16"
+            )}
+          >
+            <Reactions data={reactions} onChange={handleReaction} />{" "}
+          </div>
+        </div>
+        <div
+          className={cn(
+            " hidden",
+            currentUser?._id !== memberId && "flex ml-[4.5rem]"
+          )}
+        >
+          <Reactions data={reactions} onChange={handleReaction} />
         </div>
       </>
     );
@@ -311,9 +326,22 @@ const Message = ({
             memberId={memberId}
           />
         )}
+        <div
+          className={cn(
+            "items-end ml-16 flex",
+            currentUser?._id !== memberId && "hidden ml-16"
+          )}
+        >
+          <Reactions data={reactions} onChange={handleReaction} />{" "}
+        </div>
       </div>
-      <div className="ml-16">
-        <Reactions data={reactions} onChange={handleReaction} />{" "}
+      <div
+        className={cn(
+          " hidden",
+          currentUser?._id !== memberId && "flex ml-[4.5rem]"
+        )}
+      >
+        <Reactions data={reactions} onChange={handleReaction} />
       </div>
     </>
   );
