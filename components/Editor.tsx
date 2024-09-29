@@ -161,7 +161,7 @@ const Editor = ({
     !image && text.replace(/<\/?[^>]+(>|$)/g, "").trim().length === 0;
 
   return (
-    <div className="flex flex-col  relative">
+    <div className="flex !text-black flex-col  relative">
       <input
         type="file"
         accept="image/*"
