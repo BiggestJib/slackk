@@ -85,7 +85,6 @@ const Message = ({
     useToggleReaction();
   const workspaceId = useWorkspaceId();
   const { data: currentUser } = useCurrentMembers({ workspaceId });
-  console.log(currentUser);
 
   const handleUpdate = ({ body }: { body: string }) => {
     updateMessage(
@@ -124,7 +123,6 @@ const Message = ({
           if (parentMessageId === id) {
             onClose();
           }
-
           setEditing(null);
         },
         onError() {
@@ -133,6 +131,7 @@ const Message = ({
       }
     );
   };
+
   const isPending =
     isUpdatingMessage || isRemovingMessage || isTogglingReaction;
   const authorFallback = authorName ? authorName.charAt(0).toUpperCase() : "?";
@@ -143,38 +142,39 @@ const Message = ({
         <ConfirmDialog />
         <div
           className={cn(
-            "flex flex-col gap-2 p-1.5 px-8 rou hover:bg-gray-100/60  group relative",
+            "flex flex-col gap-2 p-2 ml-12 px-6 transition-all duration-300 ease-in-out hover:bg-gray-50/80 group relative",
             isEditing && "bg-[#f2c74433] hover:bg-[#f2c74433]",
             isRemovingMessage &&
-              "bg-rose-500/50 transform transition-all scale-y-0 origin-bottom duration-200",
-            currentUser?._id === memberId ? "items-end" : "items-start"
+              "bg-rose-400/40 transform transition-all scale-y-0 origin-bottom duration-200",
+            currentUser?._id === memberId
+              ? "items-end px-0 mr-8"
+              : " max-w-[150px] items-start"
           )}
         >
           <div
             className={cn(
-              "flex items-start max-w-[300px] min-w-[120px] rounded-xl  gap-2 ",
-              currentUser?._id !== memberId && "self-start bg-gray-400]"
+              "flex flex-row-reverse gap-8 p-4 xl:max-w-[900px] sm:max-w-[600px] shadow-lg text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg transition-transform hover:scale-105 transform-gpu",
+              currentUser?._id !== memberId &&
+                "bg-muted-foreground text-gray-800 p-4 gap-2 self-start"
             )}
           >
             <Hint label={formatFullTime(new Date(createdAt))}>
-              <button className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 leading-[22px] text-center hover:underine">
+              <button className="text-xs rounded-full opacity-0 group-hover:opacity-100 leading-[22px] text-center hover:underline transition-all duration-200">
                 {format(new Date(createdAt), "hh:mm")}
               </button>
             </Hint>
+
             {!isEditing ? (
               <div className="flex flex-col w-full">
                 <Renderer value={body} />
-                <Thumbnail url={image} />
+                {image && <Thumbnail url={image} />}
                 {updatedAt && (
                   <Hint
                     label={`Edited on ${format(new Date(updatedAt), "MMMM do, yyyy h:mm:ss a")}`}
                   >
-                    <span className="text-xs text-muted-foreground">
-                      (edited)
-                    </span>
+                    <span className="text-xs text-gray-500">(edited)</span>
                   </Hint>
                 )}
-
                 <Reactions data={reactions} onChange={handleReaction} />
                 <ThreadBar
                   count={threadCount}
@@ -196,6 +196,7 @@ const Message = ({
               </div>
             )}
           </div>
+
           {!isEditing && (
             <Toolbar
               isAuthor={isAuthor}
@@ -213,56 +214,62 @@ const Message = ({
       </>
     );
   }
+
   return (
     <>
       <ConfirmDialog />
       <div
         className={cn(
-          "flex flex-col gap-2 p-1.5 px-5  hover:bg-gray-100/60  group relative",
+          "flex  gap-2 p-2 px-6 mt-4 transition-all duration-300 ease-in-out hover:bg-gray-50/80 group relative",
           isEditing && "bg-[#f2c74433] hover:bg-[#f2c74433]",
           isRemovingMessage &&
-            "bg-rose-500/50 transform transition-all scale-y-0 origin-bottom duration-200",
-          currentUser?._id === memberId ? "items-end" : "items-start"
+            "bg-rose-400/40 transform transition-all scale-y-0 origin-bottom duration-200",
+          currentUser?._id === memberId ? "items-end flex-col" : "items-start"
         )}
       >
-        <div
-          className={cn(
-            "flex items-start max-w-[300px]  gap-2",
-            currentUser?._id !== memberId && "self-start"
-          )}
-        >
+        {currentUser?._id !== memberId && (
           <button onClick={() => onOpenProfile(memberId)}>
-            <Avatar className=" rounded-md ">
+            <Avatar className="rounded-md">
               <AvatarImage src={authorImage} />
-              <AvatarFallback className=" ">{authorFallback}</AvatarFallback>
+              <AvatarFallback>{authorFallback}</AvatarFallback>
             </Avatar>
           </button>
-
+        )}
+        <div
+          className={cn(
+            "flex text-white max-w-[150px] xl:max-w-[900px] sm:max-w-[400px] bg-gradient-to-r from-purple-600 to-indigo-600  p-4 rounded-lg shadow-lg items-start transition-transform hover:scale-105 transform-gpu gap-2",
+            currentUser?._id !== memberId &&
+              "bg-muted-foreground text-gray-800 gap-2 self-start"
+          )}
+        >
           {!isEditing ? (
-            <div className="flex flex-col w-full overflow-hidden">
-              <div className="text-sm">
+            <div className="flex flex-col w-full">
+              <div
+                className={cn(
+                  "text-sm flex justify-between",
+                  currentUser?._id === memberId && "gap-2"
+                )}
+              >
                 <button
                   onClick={() => onOpenProfile(memberId)}
-                  className="font-bold text-primary hover:underline"
+                  className="font-bold truncate max-w-[100px] text-primary hover:underline"
                 >
                   {currentUser?._id !== memberId ? authorName : "You"}
                 </button>
                 <span>&nbsp;&nbsp;</span>
                 <Hint label={formatFullTime(new Date(createdAt))}>
-                  <button className="text-sm text-muted-foreground hover:underline">
+                  <button className="text-sm hover:underline">
                     {format(new Date(createdAt), "hh:mm a")}
                   </button>
                 </Hint>
               </div>
               <Renderer value={body} />
-              <Thumbnail url={image} />
+              {image && <Thumbnail url={image} />}
               {updatedAt && (
                 <Hint
                   label={`Edited on ${format(new Date(updatedAt), "MMMM do, yyyy h:mm:ss a")}`}
                 >
-                  <span className="text-xs text-muted-foreground">
-                    (edited)
-                  </span>
+                  <span className="text-xs text-gray-500">(edited)</span>
                 </Hint>
               )}
 
@@ -287,6 +294,7 @@ const Message = ({
             </div>
           )}
         </div>
+
         {!isEditing && (
           <Toolbar
             isAuthor={isAuthor}

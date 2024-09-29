@@ -92,7 +92,6 @@ body,
 .ql-editor {
   line-height: 22px !important;
   padding: 8px 12px !important;
-  color: #1d1c1d;
   font-weight: 400 !important;
   font-family: "loto", sans-serif !important;
   font-size: 14px !important;
@@ -127,7 +126,7 @@ body,
 
   .ql-editor {
     font-size: 12px !important;
-    padding: 6px 10px !important;
+    padding: 0px 0px !important;
   }
 
   /* Reducing the toolbar height and font size on small screens */
