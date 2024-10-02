@@ -65,7 +65,7 @@ const WorkspaceSidebar = ({ closeSidebar }: WorkspaceSidebarProps) => {
           closeSidebar={closeSidebar}
           label="Threads"
           icon={MessageSquareText}
-          id={channels[0]?._id!}
+          id={channels[0]._id}
         />
         {/* <SidebarItem
           closeSidebar={closeSidebar}
