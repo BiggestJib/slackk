@@ -17,7 +17,6 @@ import { usePanel } from "@/hooks/use-panel";
 import { ThreadBar } from "./thread-bar";
 import { useCurrentMembers } from "./members/api/use-current-member";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
-import { useMemberId } from "@/hooks/use-member-id";
 
 const formatFullTime = (date: Date) => {
   return `${isToday(date) ? "Today" : isYesterday(date) ? "Yesterday" : format(date, "MMM d, yyyy")} at ${format(date, "h:mm:ss a")}`;

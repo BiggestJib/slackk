@@ -47,7 +47,7 @@ const WorkspaceSidebar = ({ closeSidebar }: WorkspaceSidebarProps) => {
         <Loader className="size-5 animate-spin text-white" />
       </div>
     );
-  if (!workspace || !member)
+  if (!workspace || !member || !channels)
     return (
       <div className="flex flex-col bg-[#5E2C5f] h-full items-center justify-center">
         <AlertTriangle className="size-5 text-white" />
@@ -65,14 +65,14 @@ const WorkspaceSidebar = ({ closeSidebar }: WorkspaceSidebarProps) => {
           closeSidebar={closeSidebar}
           label="Threads"
           icon={MessageSquareText}
-          id="threads"
+          id={channels[0]?._id!}
         />
-        <SidebarItem
+        {/* <SidebarItem
           closeSidebar={closeSidebar}
           label="Drafts & Sent"
           icon={SendHorizonal}
-          id="Drafts"
-        />
+          id={`workspace/${workspaceId}/members/${members[0]?._id}`}
+        /> */}
       </div>
       <WorkspaceSection
         label="Channels"
